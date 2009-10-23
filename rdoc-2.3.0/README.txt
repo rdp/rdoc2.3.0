@@ -1,6 +1,5 @@
 = \RDoc
 
-* Project Page: http://rubyforge.org/projects/rdoc/
 * Documentation: http://rdoc.rubyforge.org/
 
 == DESCRIPTION:
