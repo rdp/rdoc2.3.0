@@ -217,7 +217,7 @@ module RDoc::Generator
 
       @methods = list.collect do |m|
         RDoc::Generator::Method.new m, self, @options
-      end
+      end.sort
     end
 
     ##
@@ -226,7 +226,7 @@ module RDoc::Generator
     def build_method_summary_list(path_prefix = "")
       collect_methods unless @methods
 
-      @methods.sort.map do |meth|
+      @methods.map do |meth|
         {
           :name => CGI.escapeHTML(meth.name),
           :aref => "##{meth.aref}"
@@ -334,7 +334,7 @@ module RDoc::Generator
     def build_method_detail_list(section)
       outer = []
 
-      methods = @methods.sort.select do |m|
+      methods = @methods.select do |m|
         m.document_self and m.section == section
       end
 
@@ -561,6 +561,10 @@ module RDoc::Generator
                                @template::METHOD_LIST)
       end
       template_page.write_html_on(f, @values)
+      @values['file_list'] = nil
+       @values['class_list'] = nil
+       @values['method_list'] = nil
+
     end
 
     def value_hash
@@ -828,6 +832,10 @@ module RDoc::Generator
                                @template::METHOD_LIST)
       end
       template_page.write_html_on(f, @values)
+       @values['file_list'] = nil
+       @values['class_list'] = nil
+       @values['method_list'] = nil
+
     end
 
     def file_attribute_values
